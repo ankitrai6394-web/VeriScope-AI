@@ -1,1 +1,0 @@
-# VeriScope-AI
