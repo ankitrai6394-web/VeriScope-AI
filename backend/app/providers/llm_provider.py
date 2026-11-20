@@ -166,21 +166,25 @@ class MockLLMProvider(BaseLLMProvider):
 
         if schema_name == "PlannerOutput":
             data = {
-                "topic": "AI impact on graduate employment opportunities in India",
-                "research_objective": "Determine whether artificial intelligence adoption increases or suppresses entry-level technology hiring for Indian university graduates.",
+                "topic": "AI Impact on Graduate Employment in India (2022-2025)",
+                "research_objective": "Empirically assess whether artificial intelligence is creating or displacing entry-level graduate employment opportunities in India's technology sector during 2022-2025, measuring net job creation, salary premiums, and curriculum alignment gaps.",
                 "sub_questions": [
-                    "How has generative AI tooling altered entry-level hiring quotas in major Indian IT services?",
-                    "What specific AI skills and credentials yield higher starting compensation for fresh graduates?",
-                    "Are routine coding and QA jobs being automated at higher rates than new AI roles are created?",
-                    "What is the empirical disparity between graduate unemployment statistics and AI job postings?"
+                    "What is the net change in fresher intake at India's top 10 IT companies from 2021 to 2024?",
+                    "How has demand for AI/ML skills among fresh graduates shifted compared to traditional programming roles?",
+                    "What do government (MeitY, NASSCOM) datasets show about AI sector job creation vs traditional IT job displacement?",
+                    "How does India's Global Capability Center (GCC) expansion affect fresh graduate employment figures?",
+                    "What is the urban graduate unemployment rate among CS/IT graduates specifically, and how has it trended since 2022?"
                 ],
                 "search_queries": [
-                    "India AI entry level employment fresh graduates NASSCOM MeitY",
-                    "campus placement IT hiring drop generative AI India 2024",
-                    "salary premium AI machine learning freshers India survey"
+                    "India IT fresher hiring 2023 2024 AI displacement NASSCOM",
+                    "MeitY digital economy jobs AI graduates India 2024",
+                    "India campus recruitment decline TCS Infosys Wipro 2023",
+                    "AI ML specialist fresher salary premium India 2024",
+                    "India GCC global capability center jobs fresh graduates",
+                    "urban graduate unemployment IT CS India CMIE 2024"
                 ],
-                "required_source_types": ["government", "industry", "academic", "news"],
-                "research_strategy": "Multi-angle triangulation across industry hiring censuses, campus placement surveys, and government employment aggregates."
+                "required_source_types": ["government_report", "industry_census", "academic_study", "financial_press", "think_tank"],
+                "research_strategy": "Cross-reference MeitY government data with NASSCOM industry census, supplement with IIM-A academic analysis, and triangulate against CMIE household survey data to establish empirically grounded conclusions about AI's bifurcating effect on graduate employment."
             }
 
         elif schema_name == "EvidenceExtractionOutput":
@@ -227,6 +231,20 @@ class MockLLMProvider(BaseLLMProvider):
                         "source_ids": ["SRC-006"],
                         "evidence_type": "empirical",
                         "confidence": 0.86
+                    },
+                    {
+                        "claim_id": "CLM-007",
+                        "claim": "AI adoption in Indian IT will reduce net overall tech sector employment by 40% before 2027.",
+                        "source_ids": ["SRC-004", "SRC-005"],
+                        "evidence_type": "forecast",
+                        "confidence": 0.65
+                    },
+                    {
+                        "claim_id": "CLM-008",
+                        "claim": "Autonomous AI coding agents have already replaced all manual unit testing in Indian tier-2 software houses.",
+                        "source_ids": ["SRC-004"],
+                        "evidence_type": "observational",
+                        "confidence": 0.40
                     }
                 ]
             }
@@ -281,6 +299,22 @@ class MockLLMProvider(BaseLLMProvider):
                         "supporting_source_ids": ["SRC-006"],
                         "contradicting_source_ids": [],
                         "limitations": "Unemployment is influenced by broader macroeconomic cycles, not exclusively AI skill gaps."
+                    },
+                    {
+                        "claim_id": "CLM-007",
+                        "verification_status": "CONFLICTING_EVIDENCE",
+                        "explanation": "WEF forecasts a 40% task-automation shift, whereas MeitY and NASSCOM project net expansion in digital economy employment.",
+                        "supporting_source_ids": ["SRC-005"],
+                        "contradicting_source_ids": ["SRC-001", "SRC-002"],
+                        "limitations": "Projections rely on divergent macroeconomic modeling assumptions."
+                    },
+                    {
+                        "claim_id": "CLM-008",
+                        "verification_status": "INSUFFICIENT_EVIDENCE",
+                        "explanation": "Current empirical sources lack granular survey data on tier-2 enterprise tool adoption rates.",
+                        "supporting_source_ids": [],
+                        "contradicting_source_ids": [],
+                        "limitations": "Anecdotal press mentions lack verified sample sizes or statistical backing."
                     }
                 ]
             }

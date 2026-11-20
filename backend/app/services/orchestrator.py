@@ -63,6 +63,25 @@ class MultiAgentOrchestrator:
         self.contradiction_agent = ContradictionDetectionAgent(self.llm_provider)
         self.reporter_agent = ReportGenerationAgent(self.llm_provider)
 
+    async def _execute_with_retry(self, agent_callable, *args, max_retries: int = 2, **kwargs):
+        """Execute an agent call with bounded retries and exponential backoff."""
+        last_error = None
+        for attempt in range(max_retries + 1):
+            try:
+                return await agent_callable(*args, **kwargs)
+            except Exception as e:
+                last_error = e
+                if attempt < max_retries:
+                    wait_secs = 2 ** attempt
+                    logger.warning(
+                        f"Agent call failed (attempt {attempt + 1}/{max_retries + 1}): {e}. "
+                        f"Retrying in {wait_secs}s..."
+                    )
+                    await asyncio.sleep(wait_secs)
+                else:
+                    logger.error(f"Agent call exhausted {max_retries + 1} attempts: {e}")
+        raise last_error
+
     async def _update_agent_record(
         self,
         agent_name: str,

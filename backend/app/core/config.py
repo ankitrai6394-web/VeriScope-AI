@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     APP_NAME: str = "VeriScope AI"
     APP_VERSION: str = "1.0.0"
     APP_ENV: str = "development"
-    DEBUG: bool = True
+    DEBUG: bool = False
     APP_HOST: str = "127.0.0.1"
     APP_PORT: int = 8000
 

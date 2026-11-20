@@ -107,30 +107,30 @@ export const WorkspacePage: React.FC = () => {
     switch (status) {
       case 'COMPLETED':
         return (
-          <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/80 text-emerald-400 border border-emerald-500/40">
-            <CheckCircle2 className="w-3.5 h-3.5" />
+          <span aria-label="Status: Completed" className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-950/80 text-emerald-400 border border-emerald-500/40">
+            <CheckCircle2 className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Completed</span>
           </span>
         );
       case 'RUNNING':
         return (
-          <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-950/80 text-indigo-400 border border-indigo-500/40 animate-pulse">
-            <RotateCcw className="w-3.5 h-3.5 animate-spin" />
+          <span aria-label="Status: Running" className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-950/80 text-indigo-400 border border-indigo-500/40 animate-pulse">
+            <RotateCcw className="w-3.5 h-3.5 animate-spin" aria-hidden="true" />
             <span>Running</span>
           </span>
         );
       case 'FAILED':
         return (
-          <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-950/80 text-rose-400 border border-rose-500/40">
-            <XCircle className="w-3.5 h-3.5" />
+          <span aria-label="Status: Failed" className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-950/80 text-rose-400 border border-rose-500/40">
+            <XCircle className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Failed</span>
           </span>
         );
       case 'PENDING':
       default:
         return (
-          <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-900 text-slate-400 border border-slate-700">
-            <Clock className="w-3.5 h-3.5" />
+          <span aria-label="Status: Pending" className="inline-flex items-center space-x-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-slate-900 text-slate-400 border border-slate-700">
+            <Clock className="w-3.5 h-3.5" aria-hidden="true" />
             <span>Pending</span>
           </span>
         );
@@ -174,7 +174,7 @@ export const WorkspacePage: React.FC = () => {
               <span>Initiate Investigation</span>
             </h2>
 
-            <form onSubmit={handleStartResearch} className="space-y-4">
+            <form onSubmit={handleStartResearch} className="space-y-4" aria-label="Research investigation form">
               <div>
                 <label htmlFor="query-input" className="block text-xs font-semibold text-slate-400 mb-1">
                   Research Question / Topic
@@ -188,22 +188,24 @@ export const WorkspacePage: React.FC = () => {
                   maxLength={500}
                   className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-indigo-500 transition-colors resize-none"
                   required
+                  aria-describedby="query-hint"
                 />
-                <div className="flex justify-between items-center text-[11px] text-slate-400 mt-1">
+                <div id="query-hint" className="flex justify-between items-center text-[11px] text-slate-400 mt-1">
                   <span>Minimum 5 characters</span>
-                  <span>{query.length} / 500</span>
+                  <span aria-live="polite" aria-atomic="true">{query.length} / 500</span>
                 </div>
               </div>
 
               {/* Mode Selection */}
               <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-2">
+                <label className="block text-xs font-semibold text-slate-400 mb-2" id="mode-label">
                   Execution Mode
                 </label>
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-2 gap-2" role="group" aria-labelledby="mode-label">
                   <button
                     type="button"
                     onClick={() => setMode('demo')}
+                    aria-pressed={mode === 'demo'}
                     className={`p-2.5 rounded-xl border text-xs font-medium text-left transition-all ${
                       mode === 'demo'
                         ? 'border-cyan-500/80 bg-cyan-950/40 text-cyan-300'
@@ -211,7 +213,7 @@ export const WorkspacePage: React.FC = () => {
                     }`}
                   >
                     <div className="font-bold flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-cyan-400" />
+                      <span className="w-2 h-2 rounded-full bg-cyan-400" aria-hidden="true" />
                       <span>Verified Demo</span>
                     </div>
                     <p className="text-[10px] text-slate-400 mt-1">
@@ -222,6 +224,7 @@ export const WorkspacePage: React.FC = () => {
                   <button
                     type="button"
                     onClick={() => setMode('live')}
+                    aria-pressed={mode === 'live'}
                     className={`p-2.5 rounded-xl border text-xs font-medium text-left transition-all ${
                       mode === 'live'
                         ? 'border-indigo-500/80 bg-indigo-950/40 text-indigo-300'
@@ -229,7 +232,7 @@ export const WorkspacePage: React.FC = () => {
                     }`}
                   >
                     <div className="font-bold flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-indigo-400" />
+                      <span className="w-2 h-2 rounded-full bg-indigo-400" aria-hidden="true" />
                       <span>Live Search</span>
                     </div>
                     <p className="text-[10px] text-slate-400 mt-1">
@@ -395,8 +398,8 @@ export const WorkspacePage: React.FC = () => {
                       );
                     })
                   ) : (
-                    <div className="text-center py-10 space-y-2">
-                      <RotateCcw className="w-5 h-5 text-indigo-400 animate-spin mx-auto" />
+                    <div className="text-center py-10 space-y-2" role="status" aria-label="Loading research agents">
+                      <RotateCcw className="w-5 h-5 text-indigo-400 animate-spin mx-auto" aria-hidden="true" />
                       <p className="text-xs text-slate-400">Spinning up research planner & agent network...</p>
                     </div>
                   )}

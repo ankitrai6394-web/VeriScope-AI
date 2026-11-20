@@ -219,17 +219,18 @@ export const LandingPage: React.FC = () => {
         </div>
 
         <div className="overflow-x-auto rounded-2xl border border-slate-800 bg-slate-900/40">
-          <table className="w-full text-left text-sm">
+          <table className="w-full text-left text-sm" aria-label="VeriScope AI vs Standard AI Chatbot Comparison">
+            <caption className="sr-only">Comparison of architectural features between standard LLM chatbots and VeriScope AI multi-agent verification system</caption>
             <thead className="bg-slate-900/80 text-xs font-semibold text-slate-300 uppercase tracking-wider border-b border-slate-800">
               <tr>
-                <th className="p-4">Feature</th>
-                <th className="p-4 text-slate-400">Standard AI Chatbot</th>
-                <th className="p-4 text-indigo-400 font-bold">VeriScope AI (PS03)</th>
+                <th scope="col" className="p-4">Feature</th>
+                <th scope="col" className="p-4 text-slate-400">Standard AI Chatbot</th>
+                <th scope="col" className="p-4 text-indigo-400 font-bold">VeriScope AI (PS03)</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-800/60 text-slate-300">
               <tr>
-                <td className="p-4 font-medium text-white">Source Hallucination</td>
+                <th scope="row" className="p-4 font-medium text-white text-left">Source Hallucination</th>
                 <td className="p-4 text-rose-400 flex items-center gap-1.5">
                   <XCircle className="w-4 h-4 shrink-0" />
                   <span>Frequently fabricates papers, URLs & dates</span>
@@ -242,17 +243,17 @@ export const LandingPage: React.FC = () => {
                 </td>
               </tr>
               <tr>
-                <td className="p-4 font-medium text-white">Claim Verification</td>
+                <th scope="row" className="p-4 font-medium text-white text-left">Claim Verification</th>
                 <td className="p-4 text-slate-400">Uncalibrated generative confidence</td>
                 <td className="p-4 text-indigo-300 font-medium">5-stage epistemic taxonomy (Supported to Contradicted)</td>
               </tr>
               <tr>
-                <td className="p-4 font-medium text-white">Contradiction Diagnosis</td>
+                <th scope="row" className="p-4 font-medium text-white text-left">Contradiction Diagnosis</th>
                 <td className="p-4 text-slate-400">Smooths over disagreements or hallucinates one</td>
                 <td className="p-4 text-indigo-300 font-medium">Analyzes date, sample population & definition nuances</td>
               </tr>
               <tr>
-                <td className="p-4 font-medium text-white">Security & Sandboxing</td>
+                <th scope="row" className="p-4 font-medium text-white text-left">Security & Sandboxing</th>
                 <td className="p-4 text-slate-400">Vulnerable to web-based prompt injections</td>
                 <td className="p-4 text-indigo-300 font-medium">SSRF blocking, input sanitization & instruction isolation</td>
               </tr>
